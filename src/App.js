@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import "./styles.css";
 
+/*
+Todo Component
+*/
+const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+
+/*
+App Component
+*/
 export default function App() {
   /*
   state = {
@@ -32,6 +40,11 @@ export default function App() {
   return (
     <div className="app">
       <h1>To Do</h1>
+      <div className="todo-list">
+        {todos.map((todo, index) => (
+          <Todo key={index} index={index} todo={todo} />
+        ))}
+      </div>
     </div>
   );
 }
