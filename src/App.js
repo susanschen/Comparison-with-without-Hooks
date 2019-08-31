@@ -98,6 +98,12 @@ export default function App() {
         {/* addTodo={this.addTodo} */}
         <TodoForm addTodo={addTodo} />
       </div>
+      <p>
+        Tutorial from{" "}
+        <a href="https://scotch.io/tutorials/build-a-react-to-do-app-with-react-hooks-no-class-components">
+          scotch.io
+        </a>{" "}
+      </p>
     </div>
   );
 }
