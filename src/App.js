@@ -3,10 +3,13 @@ import "./styles.css";
 
 /*
 Todo Component: 
-c(R)ud - Read data
-cr(U)d - Update data
+c(R)ud - Read data passed in for todo, with todo.text
+cr(U)d - Update data with call to completeTodo
+cru(D) - Delete data with call to removeTodo
+
+This component has no change whether using hooks or states
 */
-function Todo({ todo, index, completeTodo }) {
+function Todo({ todo, index, completeTodo, removeTodo }) {
   return (
     <div
       className="todo"
@@ -15,6 +18,7 @@ function Todo({ todo, index, completeTodo }) {
       {todo.text}
       <div>
         <button onClick={() => completeTodo(index)}> Complete </button>
+        <button onClick={() => removeTodo(index)}> x </button>
       </div>
     </div>
   );
@@ -110,6 +114,14 @@ export default function App() {
     setTodos(newTodos);
   };
 
+  const removeTodo = index => {
+    // [...this.state.todos];
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    // this.setState({ todos: newTodos });
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h1>To Do</h1>
@@ -120,9 +132,13 @@ export default function App() {
             index={index}
             todo={todo}
             completeTodo={completeTodo}
+            removeTodo={removeTodo}
           />
         ))}
-        {/* completeTodo={this.completeTodo} */}
+        {/* 
+          completeTodo={this.completeTodo}
+          removeTodo={this.removeTodo}
+       */}
 
         {/* addTodo={this.addTodo} */}
         <TodoForm addTodo={addTodo} />
