@@ -2,9 +2,23 @@ import React, { useState } from "react";
 import "./styles.css";
 
 /*
-Todo Component : c(R)ud - Read data
+Todo Component: 
+c(R)ud - Read data
+cr(U)d - Update data
 */
-const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+function Todo({ todo, index, completeTodo }) {
+  return (
+    <div
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+    >
+      {todo.text}
+      <div>
+        <button onClick={() => completeTodo(index)}> Complete </button>
+      </div>
+    </div>
+  );
+}
 
 /*
 TodoForm Component : (C)rud - Create data
@@ -88,13 +102,28 @@ export default function App() {
     setTodos(newTodos);
   };
 
+  const completeTodo = index => {
+    // [...this.state.todos]
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    // this.setState({ todos: newTodos });
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h1>To Do</h1>
       <div className="todo-list">
         {todos.map((todo, index) => (
-          <Todo key={index} index={index} todo={todo} />
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+            completeTodo={completeTodo}
+          />
         ))}
+        {/* completeTodo={this.completeTodo} */}
+
         {/* addTodo={this.addTodo} */}
         <TodoForm addTodo={addTodo} />
       </div>
